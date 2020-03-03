@@ -1,0 +1,12 @@
+{
+  "vendor": "vtex",
+  "name": "order-profile",
+  "version": "0.0.0",
+  "title": "Order Profile",
+  "description": "Centralizes all profile related requests to the Checkout API",
+  "builders": {
+    "docs": "0.x",
+    "react": "3.x"
+  },
+  "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
+}
