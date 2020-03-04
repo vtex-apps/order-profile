@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "order-profile",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "title": "Order Profile",
   "description": "Centralizes all profile related requests to the Checkout API",
   "builders": {
