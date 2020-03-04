@@ -4422,17 +4422,21 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-"vtex.checkout-graphql@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-graphql@0.24.0/public/@types/vtex.checkout-graphql":
+"vtex.checkout-graphql@https://lucas--checkoutio.myvtex.com/_v/private/typings/linked/v1/vtex.checkout-graphql@0.24.0+build1583326383/public/@types/vtex.checkout-graphql":
   version "0.24.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-graphql@0.24.0/public/@types/vtex.checkout-graphql#37b5ba2720c336c1b3ec55832e3b0ebb45e8433b"
+  resolved "https://lucas--checkoutio.myvtex.com/_v/private/typings/linked/v1/vtex.checkout-graphql@0.24.0+build1583326383/public/@types/vtex.checkout-graphql#81480bf57794a1298d264a552ca8bdec41f47f08"
+
+"vtex.checkout-resources@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.20.2/public/@types/vtex.checkout-resources":
+  version "0.20.2"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.20.2/public/@types/vtex.checkout-resources#92d3eab8fd9d1d3ebfdb56cdf9495aac565b0092"
 
 "vtex.order-manager@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.8.0/public/@types/vtex.order-manager":
   version "0.8.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.8.0/public/@types/vtex.order-manager#c2246db14b75b10cdeafee1636de310bff746d6c"
 
-"vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.93.2/public/@types/vtex.render-runtime":
-  version "8.93.2"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.93.2/public/@types/vtex.render-runtime#58d534da726c650b57017b311b14f89e92607a2a"
+"vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.94.0/public/@types/vtex.render-runtime":
+  version "8.94.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.94.0/public/@types/vtex.render-runtime#e79eb9a66801476b66e7ed354a83a7ff1f1c72c7"
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"

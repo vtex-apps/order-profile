@@ -3,11 +3,15 @@ import { useMutation } from 'react-apollo'
 import MutationUpdateOrderFormProfile from 'vtex.checkout-resources/MutationUpdateOrderFormProfile'
 import { useOrderQueue, useQueueStatus } from 'vtex.order-manager/OrderQueue'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
-import { OrderForm } from 'vtex.checkout-graphql'
+import {
+  OrderForm,
+  MutationUpdateOrderFormProfileArgs,
+  UserProfileInput,
+} from 'vtex.checkout-graphql'
 import { QueueStatus } from 'vtex.order-manager/react/constants'
 
 interface ProfileContext {
-  setOrderProfile: (email: string) => Promise<{ success: boolean }>
+  setOrderProfile: (profile: UserProfileInput) => Promise<{ success: boolean }>
 }
 
 const OrderProfileContext = React.createContext<ProfileContext | undefined>(
@@ -16,10 +20,6 @@ const OrderProfileContext = React.createContext<ProfileContext | undefined>(
 
 interface UpdateOrderFormProfileMutation {
   updateOrderFormProfile: OrderForm
-}
-
-interface UpdateOrderFormProfileMutationVariables {
-  email: string
 }
 
 const SET_PROFILE_TASK = 'SetProfileTask'
@@ -32,14 +32,14 @@ const OrderProfile: React.FC = ({ children }) => {
 
   const [updateOrderFormProfile] = useMutation<
     UpdateOrderFormProfileMutation,
-    UpdateOrderFormProfileMutationVariables
+    MutationUpdateOrderFormProfileArgs
   >(MutationUpdateOrderFormProfile)
 
   const setOrderProfile = useCallback(
-    async (email: string) => {
+    async (profile: UserProfileInput) => {
       const task = async () => {
         const { data } = await updateOrderFormProfile({
-          variables: { email },
+          variables: { input: profile },
         })
 
         const orderForm = data!.updateOrderFormProfile
