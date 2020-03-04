@@ -1,14 +1,13 @@
 import React, { useMemo, useContext, useCallback } from 'react'
 import { useMutation } from 'react-apollo'
 import MutationUpdateOrderFormProfile from 'vtex.checkout-resources/MutationUpdateOrderFormProfile'
-import { useOrderQueue, useQueueStatus } from 'vtex.order-manager/OrderQueue'
-import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import {
-  OrderForm,
-  MutationUpdateOrderFormProfileArgs,
-  UserProfileInput,
-} from 'vtex.checkout-graphql'
-import { QueueStatus } from 'vtex.order-manager/react/constants'
+  useOrderQueue,
+  useQueueStatus,
+  QueueStatus,
+} from 'vtex.order-manager/OrderQueue'
+import { useOrderForm } from 'vtex.order-manager/OrderForm'
+import { OrderForm, UserProfileInput } from 'vtex.checkout-graphql'
 
 interface ProfileContext {
   setOrderProfile: (profile: UserProfileInput) => Promise<{ success: boolean }>
@@ -22,9 +21,13 @@ interface UpdateOrderFormProfileMutation {
   updateOrderFormProfile: OrderForm
 }
 
+interface UpdateOrderFormProfileMutationVariables {
+  profile: UserProfileInput
+}
+
 const SET_PROFILE_TASK = 'SetProfileTask'
 
-const OrderProfile: React.FC = ({ children }) => {
+export const OrderProfile: React.FC = ({ children }) => {
   const { enqueue, listen } = useOrderQueue()
   const { setOrderForm } = useOrderForm()
 
@@ -32,14 +35,14 @@ const OrderProfile: React.FC = ({ children }) => {
 
   const [updateOrderFormProfile] = useMutation<
     UpdateOrderFormProfileMutation,
-    MutationUpdateOrderFormProfileArgs
+    UpdateOrderFormProfileMutationVariables
   >(MutationUpdateOrderFormProfile)
 
   const setOrderProfile = useCallback(
     async (profile: UserProfileInput) => {
       const task = async () => {
         const { data } = await updateOrderFormProfile({
-          variables: { input: profile },
+          variables: { profile },
         })
 
         const orderForm = data!.updateOrderFormProfile
@@ -85,4 +88,4 @@ export const useOrderProfile = () => {
   return context
 }
 
-export default OrderProfile
+export default { OrderProfile, useOrderProfile }

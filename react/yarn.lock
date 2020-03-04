@@ -4422,13 +4422,13 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-"vtex.checkout-graphql@https://lucas--checkoutio.myvtex.com/_v/private/typings/linked/v1/vtex.checkout-graphql@0.24.0+build1583326383/public/@types/vtex.checkout-graphql":
+"vtex.checkout-graphql@https://lucas--checkoutio.myvtex.com/_v/private/typings/linked/v1/vtex.checkout-graphql@0.24.0+build1583340197/public/@types/vtex.checkout-graphql":
   version "0.24.0"
-  resolved "https://lucas--checkoutio.myvtex.com/_v/private/typings/linked/v1/vtex.checkout-graphql@0.24.0+build1583326383/public/@types/vtex.checkout-graphql#81480bf57794a1298d264a552ca8bdec41f47f08"
+  resolved "https://lucas--checkoutio.myvtex.com/_v/private/typings/linked/v1/vtex.checkout-graphql@0.24.0+build1583340197/public/@types/vtex.checkout-graphql#9e821e77ee30bb0a42e36e67298fc5a4bb68dd45"
 
-"vtex.checkout-resources@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.20.2/public/@types/vtex.checkout-resources":
-  version "0.20.2"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.checkout-resources@0.20.2/public/@types/vtex.checkout-resources#92d3eab8fd9d1d3ebfdb56cdf9495aac565b0092"
+"vtex.checkout-resources@https://lucas--checkoutio.myvtex.com/_v/private/typings/linked/v1/vtex.checkout-resources@0.20.3+build1583340193/public/@types/vtex.checkout-resources":
+  version "0.20.3"
+  resolved "https://lucas--checkoutio.myvtex.com/_v/private/typings/linked/v1/vtex.checkout-resources@0.20.3+build1583340193/public/@types/vtex.checkout-resources#165451e8ecfbce2e9c17fac80447d98beb57ff05"
 
 "vtex.order-manager@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.8.0/public/@types/vtex.order-manager":
   version "0.8.0"
