@@ -27,7 +27,7 @@ interface UpdateOrderFormProfileMutationVariables {
 
 const SET_PROFILE_TASK = 'SetProfileTask'
 
-export const OrderProfile: React.FC = ({ children }) => {
+export const OrderProfileProvider: React.FC = ({ children }) => {
   const { enqueue, listen } = useOrderQueue()
   const { setOrderForm } = useOrderForm()
 
@@ -88,4 +88,4 @@ export const useOrderProfile = () => {
   return context
 }
 
-export default { OrderProfile, useOrderProfile }
+export default { OrderProfileProvider, useOrderProfile }
