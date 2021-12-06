@@ -3,12 +3,12 @@ import { useMutation } from 'react-apollo'
 import MutationUpdateOrderFormProfile from 'vtex.checkout-resources/MutationUpdateOrderFormProfile'
 import MutationUpdateClientPreferencesData from 'vtex.checkout-resources/MutationUpdateClientPreferencesData'
 import { OrderQueue, OrderForm } from 'vtex.order-manager'
+
 import {
-  OrderForm as CheckoutOrderForm,
   UserProfileInput,
   ClientPreferencesDataInput,
-} from 'vtex.checkout-graphql'
-
+  OrderForm as CheckoutOrderForm,
+} from '../typings/index'
 import { useLogger } from '../utils/logger'
 import {
   createOrderProfileProvider,
@@ -47,7 +47,7 @@ function useUpdateOrderFormProfile() {
           variables: { profile },
         })
 
-        const newOrderForm = data?.updateOrderFormProfile
+        const newOrderForm = data!.updateOrderFormProfile
 
         return newOrderForm
       },
@@ -62,13 +62,13 @@ function useUpdateClientPreferencesData() {
     UpdateClientPreferencesDataMutationVariables
   >(MutationUpdateClientPreferencesData)
   return {
-    updateOrderFormProfile: useCallback(
+    updateClientPreferencesData: useCallback(
       async (clientPreferences: ClientPreferencesDataInput) => {
         const { data } = await updateClientPreferencesData({
           variables: { clientPreferences },
         })
 
-        const newOrderForm = data?.updateClientPreferencesData
+        const newOrderForm = data!.updateClientPreferencesData
 
         return newOrderForm
       },
@@ -78,12 +78,12 @@ function useUpdateClientPreferencesData() {
 }
 
 const { OrderProfileProvider } = createOrderProfileProvider({
-  useUpdateClientPreferencesData,
-  useLogger,
   useOrderQueue,
   useOrderForm,
   useQueueStatus,
+  useLogger,
   useUpdateOrderFormProfile,
+  useUpdateClientPreferencesData,
 })
 
 export { OrderProfileProvider, useOrderProfile }

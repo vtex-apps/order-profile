@@ -4,8 +4,8 @@ import {
   OrderQueueContext,
   OrderForm,
 } from '@vtex/order-manager'
-import { UseLogger } from '@vtex/order-manager/types/modules/logger'
 
+import { UseLogger } from '../utils/logger'
 import {
   UserProfileInput,
   ClientPreferencesDataInput,
@@ -39,7 +39,7 @@ type UseUpdateClientPreferencesData = () => {
   updateClientPreferencesData: (
     clientPreferences: ClientPreferencesDataInput,
     orderFormId?: string
-  ) => Promise<any>
+  ) => Promise<CheckoutOrderForm>
 }
 
 interface CreateOrderProfileProvider<O extends OrderForm> {

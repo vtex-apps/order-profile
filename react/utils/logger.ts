@@ -2,9 +2,13 @@ interface LogParams {
   type: 'Error'
   level: 'Critical'
   event: unknown
-  workflowType: 'OrderItems'
+  workflowType: 'OrderProfile'
   workflowInstance: string
 }
+
+export type LogFn = (params: LogParams) => void
+
+export type UseLogger = () => { log: LogFn }
 
 export function useLogger() {
   const log = ({
