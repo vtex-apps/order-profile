@@ -6,10 +6,6 @@ interface LogParams {
   workflowInstance: string
 }
 
-export type LogFn = (params: LogParams) => void
-
-export type UseLogger = () => { log: LogFn }
-
 export function useLogger() {
   const log = ({
     type,

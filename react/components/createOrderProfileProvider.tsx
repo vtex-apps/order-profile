@@ -32,14 +32,14 @@ type UseUpdateOrderFormProfile = () => {
   updateOrderFormProfile: (
     profile: UserProfileInput,
     orderFormId?: string
-  ) => PromiseLike<CheckoutOrderForm>
+  ) => Promise<CheckoutOrderForm>
 }
 
 type UseUpdateClientPreferencesData = () => {
   updateClientPreferencesData: (
     clientPreferences: ClientPreferencesDataInput,
     orderFormId?: string
-  ) => PromiseLike<CheckoutOrderForm>
+  ) => Promise<any>
 }
 
 interface CreateOrderProfileProvider<O extends OrderForm> {
