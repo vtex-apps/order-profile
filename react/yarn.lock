@@ -1575,6 +1575,13 @@
   resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.8.3.tgz#781d360c282436494b32fe7d9f7f8e64b3118aa3"
   integrity sha512-fbF6oTd4sGGy0xjHPKAt+eS2CrxJ3+6gQ3FGcBoIJR2TLAyCkCyI8JqZNy+FeON0AhVgNJoUumVoZQjBFUqHkw==
 
+"@vtex/order-manager@^0.5.4-beta.0":
+  version "0.5.4-beta.0"
+  resolved "https://registry.yarnpkg.com/@vtex/order-manager/-/order-manager-0.5.4-beta.0.tgz#68db01d1704202e1161cb6b6d57c519b307aa2f3"
+  integrity sha512-t7dWMpwlZktSEdcVXk5MOKbDow8UFftpi/ibZVE5hitfCoVeJE7JszYiuPV4ChM58aZtdEVYGs1F/52OyLRoUw==
+  dependencies:
+    react "17.0.1"
+
 "@vtex/test-tools@3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@vtex/test-tools/-/test-tools-3.0.3.tgz#1538e5f405911d5ea362570ee9f33166a7910286"
@@ -4165,9 +4172,9 @@ pify@^4.0.1:
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
 pirates@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.1.tgz#643a92caf894566f91b2b986d2c66950a8e2fb87"
-  integrity sha512-WuNqLTbMI3tmfef2TKxlQmAiLHKtFhlsCZnPIpuv2Ow0RDVO8lfy1Opf4NUzlMXLjPl+Men7AuVdX6TA+s+uGA==
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.3.tgz#41a4acbc9bc78decd7f205ee828f34929b9d5749"
+  integrity sha512-e30YDq2NWgpyIpaKWgols6m/YfgyIyLEmVvrLH5mGrwUs6R6N2h5+DKluT502tex/BK+DO9DIRZ0qqm1/M3FrQ==
   dependencies:
     node-modules-regexp "^1.0.0"
 
@@ -4324,6 +4331,14 @@ react-test-renderer@^16.12.0:
     prop-types "^15.6.2"
     react-is "^16.8.6"
     scheduler "^0.19.1"
+
+react@17.0.1:
+  version "17.0.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-17.0.1.tgz#6e0600416bd57574e3f86d92edba3d9008726127"
+  integrity sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 react@^16.13.0, react@^16.9.0:
   version "16.14.0"
@@ -4962,9 +4977,9 @@ ts-invariant@^0.4.0, ts-invariant@^0.4.4:
     tslib "^1.9.3"
 
 ts-invariant@^0.9.0:
-  version "0.9.3"
-  resolved "https://registry.yarnpkg.com/ts-invariant/-/ts-invariant-0.9.3.tgz#4b41e0a80c2530a56ce4b8fd4e14183aaac0efa8"
-  integrity sha512-HinBlTbFslQI0OHP07JLsSXPibSegec6r9ai5xxq/qHYCsIQbzpymLpDhAUsnXcSrDEcd0L62L8vsOEdzM0qlA==
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/ts-invariant/-/ts-invariant-0.9.4.tgz#42ac6c791aade267dd9dc65276549df5c5d71cac"
+  integrity sha512-63jtX/ZSwnUNi/WhXjnK8kz4cHHpYS60AnmA6ixz17l7E12a5puCWFlNpkne5Rl0J8TBPVHpGjsj4fxs8ObVLQ==
   dependencies:
     tslib "^2.1.0"
 
