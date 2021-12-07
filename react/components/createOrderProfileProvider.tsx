@@ -55,7 +55,6 @@ const SET_PROFILE_TASK = 'SetProfileTask'
 const SET_CLIENT_PREFERENCES_TASK = 'SetClientPreferencesTask'
 
 export function createOrderProfileProvider({
-  useLogger,
   useOrderQueue,
   useUpdateClientPreferencesData,
   useUpdateOrderFormProfile,
@@ -67,7 +66,6 @@ export function createOrderProfileProvider({
     const { setOrderForm, orderForm } = useOrderForm()
     const { updateOrderFormProfile } = useUpdateOrderFormProfile()
     const { updateClientPreferencesData } = useUpdateClientPreferencesData()
-    const { log } = useLogger()
 
     const queueStatusRef = useQueueStatus(listen)
     const { id } = orderForm

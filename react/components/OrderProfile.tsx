@@ -1,8 +1,8 @@
-import React, { useMemo, useContext, useCallback } from 'react'
+import { useCallback } from 'react'
 import { useMutation } from 'react-apollo'
 import MutationUpdateOrderFormProfile from 'vtex.checkout-resources/MutationUpdateOrderFormProfile'
 import MutationUpdateClientPreferencesData from 'vtex.checkout-resources/MutationUpdateClientPreferencesData'
-import { OrderQueue, OrderForm } from 'vtex.order-manager'
+import { OrderQueue } from 'vtex.order-manager'
 
 import {
   UserProfileInput,
@@ -14,6 +14,7 @@ import {
   createOrderProfileProvider,
   useOrderProfile,
 } from './createOrderProfileProvider'
+import { useOrderForm, useOrderQueue } from '@vtex/order-manager'
 
 interface UpdateOrderFormProfileMutation {
   updateOrderFormProfile: CheckoutOrderForm
@@ -31,8 +32,7 @@ interface UpdateClientPreferencesDataMutationVariables {
   clientPreferences: ClientPreferencesDataInput
 }
 
-const { useOrderForm } = OrderForm
-const { useOrderQueue, useQueueStatus } = OrderQueue
+const { useQueueStatus } = OrderQueue
 
 function useUpdateOrderFormProfile() {
   const [updateOrderFormProfile] = useMutation<
