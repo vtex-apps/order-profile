@@ -80,7 +80,7 @@ export interface AssemblyOptionInput {
 export interface AssemblyOptionItem {
   __typename?: 'AssemblyOptionItem'
   added: Array<Maybe<AddedOptionItem>>
-  removed: Array<Maybe<RemovedOptionItem>>
+  removed: Array<Maybe<unknown>>
   parentPrice?: Maybe<Scalars['Float']>
 }
 
@@ -240,51 +240,6 @@ export interface Message {
   text?: Maybe<Scalars['String']>
 }
 
-export interface Mutation {
-  __typename?: 'Mutation'
-  addToCart?: Maybe<OrderForm>
-  updateItems?: Maybe<OrderForm>
-  insertCoupon?: Maybe<OrderForm>
-  estimateShipping?: Maybe<OrderForm>
-  selectDeliveryOption?: Maybe<OrderForm>
-  savePaymentToken?: Maybe<SavePaymentTokenPayload>
-  updateOrderFormProfile: OrderForm
-  updateClientPreferencesData: OrderForm
-}
-
-export interface MutationAddToCartArgs {
-  items?: Maybe<Array<Maybe<ItemInput>>>
-  marketingData?: Maybe<MarketingDataInput>
-}
-
-export interface MutationUpdateItemsArgs {
-  orderItems?: Maybe<Array<Maybe<ItemInput>>>
-}
-
-export interface MutationInsertCouponArgs {
-  text?: Maybe<Scalars['String']>
-}
-
-export interface MutationEstimateShippingArgs {
-  address?: Maybe<AddressInput>
-}
-
-export interface MutationSelectDeliveryOptionArgs {
-  deliveryOptionId?: Maybe<Scalars['String']>
-}
-
-export interface MutationSavePaymentTokenArgs {
-  paymentTokens?: Maybe<Array<Maybe<PaymentToken>>>
-}
-
-export interface MutationUpdateOrderFormProfileArgs {
-  input: UserProfileInput
-}
-
-export interface MutationUpdateClientPreferencesDataArgs {
-  input: ClientPreferencesDataInput
-}
-
 export interface OrderForm {
   id: Scalars['ID']
   items: unknown[]
@@ -297,7 +252,7 @@ export interface OrderForm {
   totalizers: Totalizer[]
   value: Scalars['Float']
   messages: OrderFormMessages
-  paymentData: PaymentData
+  paymentData: unknown
   clientProfileData?: Maybe<unknown>
   clientPreferencesData?: Maybe<unknown>
   allowManualPrice?: Maybe<Scalars['Boolean']>
@@ -309,54 +264,6 @@ export interface OrderFormMessages {
   __typename?: 'OrderFormMessages'
   couponMessages: Message[]
   generalMessages: Message[]
-}
-
-export interface PaymentData {
-  __typename?: 'PaymentData'
-  installmentOptions: Array<Maybe<InstallmentOption>>
-  paymentSystems: Array<Maybe<PaymentSystem>>
-}
-
-export interface PaymentSystem {
-  __typename?: 'PaymentSystem'
-  id: Scalars['String']
-  name: Scalars['String']
-  groupName: Scalars['String']
-  validator?: Maybe<Validator>
-  stringId: Scalars['String']
-  requiresDocument: Scalars['Boolean']
-  isCustom: Scalars['Boolean']
-  description?: Maybe<Scalars['String']>
-  requiresAuthentication?: Maybe<Scalars['Boolean']>
-  dueDate?: Maybe<Scalars['String']>
-}
-
-export interface PaymentToken {
-  creditCardToken: Scalars['String']
-  paymentSystem: Scalars['String']
-}
-
-export interface Query {
-  __typename?: 'Query'
-  getCardSessionId?: Maybe<Scalars['String']>
-  orderForm?: Maybe<OrderForm>
-  checkoutProfile?: Maybe<CheckoutProfile>
-}
-
-export interface QueryCheckoutProfileArgs {
-  email: Scalars['String']
-}
-
-export interface RemovedOptionItem {
-  __typename?: 'RemovedOptionItem'
-  initialQuantity?: Maybe<Scalars['Int']>
-  removedQuantity?: Maybe<Scalars['Int']>
-  name?: Maybe<Scalars['String']>
-}
-
-export interface SavePaymentTokenPayload {
-  __typename?: 'SavePaymentTokenPayload'
-  status?: Maybe<Scalars['String']>
 }
 
 export interface Shipping {
