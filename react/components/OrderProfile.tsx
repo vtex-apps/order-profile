@@ -9,7 +9,8 @@ import {
   UserProfileInput,
   ClientPreferencesDataInput,
   OrderForm as CheckoutOrderForm,
-} from '../typings/index'
+} from '@vtex/checkout-types'
+
 import { useLogger } from '../utils/logger'
 import {
   createOrderProfileProvider,

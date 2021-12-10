@@ -1575,6 +1575,13 @@
   resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.8.3.tgz#781d360c282436494b32fe7d9f7f8e64b3118aa3"
   integrity sha512-fbF6oTd4sGGy0xjHPKAt+eS2CrxJ3+6gQ3FGcBoIJR2TLAyCkCyI8JqZNy+FeON0AhVgNJoUumVoZQjBFUqHkw==
 
+"@vtex/checkout-types@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@vtex/checkout-types/-/checkout-types-0.1.2.tgz#4a137870a4b565a19bf6d998bd963a01897e2131"
+  integrity sha512-jShCJ6jbPLRiVIKukF56KuYBV/BggnsRsheJeIcHBk9+vyHgEFsfg3Afkk1WQMOPbhNHTy8wSSD7XU6LsfKbcQ==
+  dependencies:
+    react "17.0.1"
+
 "@vtex/order-manager@^0.5.4-beta.0":
   version "0.5.4-beta.0"
   resolved "https://registry.yarnpkg.com/@vtex/order-manager/-/order-manager-0.5.4-beta.0.tgz#68db01d1704202e1161cb6b6d57c519b307aa2f3"

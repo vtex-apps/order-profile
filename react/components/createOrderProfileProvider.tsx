@@ -10,7 +10,7 @@ import {
   UserProfileInput,
   ClientPreferencesDataInput,
   OrderForm as CheckoutOrderForm,
-} from '../typings/index'
+} from '@vtex/checkout-types'
 
 export const QueueStatus = {
   PENDING: 'Pending',
@@ -55,7 +55,7 @@ const SET_PROFILE_TASK = 'SetProfileTask'
 const SET_CLIENT_PREFERENCES_TASK = 'SetClientPreferencesTask'
 
 export function createOrderProfileProvider({
-  //  useLogger,
+  useLogger,
   useOrderQueue,
   useUpdateClientPreferencesData,
   useUpdateOrderFormProfile,
@@ -67,7 +67,7 @@ export function createOrderProfileProvider({
     const { setOrderForm, orderForm } = useOrderForm()
     const { updateOrderFormProfile } = useUpdateOrderFormProfile()
     const { updateClientPreferencesData } = useUpdateClientPreferencesData()
-    // const { log } = useLogger()
+    const { log } = useLogger()
 
     const queueStatusRef = useQueueStatus(listen)
     const { id } = orderForm
@@ -89,6 +89,16 @@ export function createOrderProfileProvider({
 
           return { success: true }
         } catch (err) {
+          log({
+            type: 'Error',
+            level: 'Critical',
+            event: {
+              error: err,
+              orderFormId: id,
+            },
+            workflowInstance: 'client-profile-not-updated',
+          })
+
           if (!err || err.code !== 'TASK_CANCELLED') {
             throw err
           }
@@ -119,6 +129,15 @@ export function createOrderProfileProvider({
 
           return { success: true }
         } catch (err) {
+          log({
+            type: 'Error',
+            level: 'Critical',
+            event: {
+              error: err,
+              orderFormId: id,
+            },
+            workflowInstance: 'client-preferences-data-not-updated',
+          })
           return { success: false }
         }
       },
