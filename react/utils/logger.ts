@@ -1,4 +1,4 @@
-interface LogParams {
+export interface LogParams {
   type: 'Error'
   level: 'Critical'
   event: unknown

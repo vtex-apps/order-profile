@@ -13,6 +13,7 @@
   "devDependencies": {
     "@apollo/react-testing": "^4.0.0",
     "@babel/compat-data": "^7.9.0",
+    "@testing-library/react-hooks": "^7.0.2",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
     "@vtex/checkout-types": "^0.1.2",
