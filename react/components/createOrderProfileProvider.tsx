@@ -1,16 +1,12 @@
 import React, { FC, useMemo, useContext, useCallback } from 'react'
-import {
-  OrderFormContext,
-  OrderQueueContext,
-  OrderForm,
-} from '@vtex/order-manager'
-
-import { UseLogger } from '../utils/logger'
+import { OrderQueueContext } from '@vtex/order-manager'
 import {
   UserProfileInput,
   ClientPreferencesDataInput,
   OrderForm as CheckoutOrderForm,
 } from '@vtex/checkout-types'
+
+import { UseLogger } from '../utils/logger'
 
 export const QueueStatus = {
   PENDING: 'Pending',
@@ -42,10 +38,27 @@ type UseUpdateClientPreferencesData = () => {
   ) => Promise<CheckoutOrderForm>
 }
 
-interface CreateOrderProfileProvider<O extends OrderForm> {
+type ListenFunction = (event: any, callback: () => void) => () => void
+interface QueueContext {
+  enqueue: (task: () => Promise<CheckoutOrderForm>, id?: string) => any
+  listen: ListenFunction
+  isWaiting: (id: string) => boolean
+}
+declare type OrderFormUpdate<O> =
+  | Partial<O>
+  | ((prevOrderForm: O) => Partial<O>)
+
+interface OrderContext<O extends CheckoutOrderForm> {
+  loading: boolean
+  setOrderForm: (nextValue: OrderFormUpdate<O>) => void
+  error: any | undefined
+  orderForm: O
+}
+
+interface CreateOrderProfileProvider<O extends CheckoutOrderForm> {
   useLogger: UseLogger
-  useOrderQueue: () => OrderQueueContext<O>
-  useOrderForm: () => OrderFormContext<O>
+  useOrderQueue: () => QueueContext
+  useOrderForm: () => OrderContext<O>
   useUpdateClientPreferencesData: UseUpdateClientPreferencesData
   useUpdateOrderFormProfile: UseUpdateOrderFormProfile
   useQueueStatus: (listen: OrderQueueContext<O>['listen']) => any
@@ -106,7 +119,7 @@ export function createOrderProfileProvider({
           return { success: false }
         }
       },
-      [updateOrderFormProfile, enqueue, queueStatusRef, setOrderForm, id]
+      [updateOrderFormProfile, id, enqueue, queueStatusRef, setOrderForm, log]
     )
 
     const setClientPreferencesData = useCallback(
@@ -138,10 +151,18 @@ export function createOrderProfileProvider({
             },
             workflowInstance: 'client-preferences-data-not-updated',
           })
+
           return { success: false }
         }
       },
-      [enqueue, queueStatusRef, setOrderForm, updateClientPreferencesData, id]
+      [
+        updateClientPreferencesData,
+        id,
+        enqueue,
+        queueStatusRef,
+        setOrderForm,
+        log,
+      ]
     )
 
     const value = useMemo(

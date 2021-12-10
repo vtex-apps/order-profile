@@ -1,32 +1,23 @@
-import React, { useMemo, useContext, useCallback } from 'react'
+import { useCallback } from 'react'
 import { useMutation } from 'react-apollo'
 import MutationUpdateOrderFormProfile from 'vtex.checkout-resources/MutationUpdateOrderFormProfile'
 import MutationUpdateClientPreferencesData from 'vtex.checkout-resources/MutationUpdateClientPreferencesData'
-import {
-  useOrderQueue,
-  useQueueStatus,
-  QueueStatus,
-} from 'vtex.order-manager/OrderQueue'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
+import { useQueueStatus, useOrderQueue } from 'vtex.order-manager/OrderQueue'
 import {
-  OrderForm,
   UserProfileInput,
   ClientPreferencesDataInput,
-} from 'vtex.checkout-graphql'
+  OrderForm as CheckoutOrderForm,
+} from '@vtex/checkout-types'
 
-interface ProfileContext {
-  setOrderProfile: (profile: UserProfileInput) => Promise<{ success: boolean }>
-  setClientPreferencesData: (
-    clientPreferences: ClientPreferencesDataInput
-  ) => Promise<{ success: boolean }>
-}
-
-const OrderProfileContext = React.createContext<ProfileContext | undefined>(
-  undefined
-)
+import { useLogger } from './utils/logger'
+import {
+  createOrderProfileProvider,
+  useOrderProfile,
+} from './components/createOrderProfileProvider'
 
 interface UpdateOrderFormProfileMutation {
-  updateOrderFormProfile: OrderForm
+  updateOrderFormProfile: CheckoutOrderForm
 }
 
 interface UpdateOrderFormProfileMutationVariables {
@@ -34,109 +25,67 @@ interface UpdateOrderFormProfileMutationVariables {
 }
 
 interface UpdateClientPreferencesDataMutation {
-  updateClientPreferencesData: OrderForm
+  updateClientPreferencesData: CheckoutOrderForm
 }
 
 interface UpdateClientPreferencesDataMutationVariables {
   clientPreferences: ClientPreferencesDataInput
 }
 
-const SET_PROFILE_TASK = 'SetProfileTask'
-const SET_CLIENT_PREFERENCES_TASK = 'SetClientPreferencesTask'
+// const { useQueueStatus } = OrderQueue
 
-export const OrderProfileProvider: React.FC = ({ children }) => {
-  const { enqueue, listen } = useOrderQueue()
-  const { setOrderForm } = useOrderForm()
-
-  const queueStatusRef = useQueueStatus(listen)
-
+function useUpdateOrderFormProfile() {
   const [updateOrderFormProfile] = useMutation<
     UpdateOrderFormProfileMutation,
     UpdateOrderFormProfileMutationVariables
   >(MutationUpdateOrderFormProfile)
+
+  return {
+    updateOrderFormProfile: useCallback(
+      async (profile: UserProfileInput) => {
+        const { data } = await updateOrderFormProfile({
+          variables: { profile },
+        })
+
+        const newOrderForm = data!.updateOrderFormProfile
+
+        return newOrderForm
+      },
+      [updateOrderFormProfile]
+    ),
+  }
+}
+
+function useUpdateClientPreferencesData() {
   const [updateClientPreferencesData] = useMutation<
     UpdateClientPreferencesDataMutation,
     UpdateClientPreferencesDataMutationVariables
   >(MutationUpdateClientPreferencesData)
 
-  const setOrderProfile = useCallback(
-    async (profile: UserProfileInput) => {
-      const task = async () => {
-        const { data } = await updateOrderFormProfile({
-          variables: { profile },
-        })
-
-        const orderForm = data!.updateOrderFormProfile
-
-        return orderForm
-      }
-
-      try {
-        const newOrderForm = await enqueue(task, SET_PROFILE_TASK)
-
-        if (queueStatusRef.current === QueueStatus.FULFILLED) {
-          setOrderForm(newOrderForm)
-        }
-
-        return { success: true }
-      } catch (err) {
-        if (!err || err.code !== 'TASK_CANCELLED') {
-          throw err
-        }
-
-        return { success: false }
-      }
-    },
-    [updateOrderFormProfile, enqueue, queueStatusRef, setOrderForm]
-  )
-
-  const setClientPreferencesData = useCallback(
-    async (clientPreferences: ClientPreferencesDataInput) => {
-      const task = async () => {
+  return {
+    updateClientPreferencesData: useCallback(
+      async (clientPreferences: ClientPreferencesDataInput) => {
         const { data } = await updateClientPreferencesData({
           variables: { clientPreferences },
         })
 
-        const orderForm = data!.updateClientPreferencesData
+        const newOrderForm = data!.updateClientPreferencesData
 
-        return orderForm
-      }
-
-      try {
-        const newOrderForm = await enqueue(task, SET_CLIENT_PREFERENCES_TASK)
-
-        if (queueStatusRef.current === QueueStatus.FULFILLED) {
-          setOrderForm(newOrderForm)
-        }
-
-        return { success: true }
-      } catch (err) {
-        return { success: false }
-      }
-    },
-    [enqueue, queueStatusRef, setOrderForm, updateClientPreferencesData]
-  )
-
-  const value = useMemo(() => ({ setOrderProfile, setClientPreferencesData }), [
-    setOrderProfile,
-    setClientPreferencesData,
-  ])
-
-  return (
-    <OrderProfileContext.Provider value={value}>
-      {children}
-    </OrderProfileContext.Provider>
-  )
-}
-
-export const useOrderProfile = () => {
-  const context = useContext(OrderProfileContext)
-
-  if (context === undefined) {
-    throw new Error('useOrderProfile must be used within an <OrderProfile />')
+        return newOrderForm
+      },
+      [updateClientPreferencesData]
+    ),
   }
-
-  return context
 }
 
+const { OrderProfileProvider } = createOrderProfileProvider({
+  useOrderQueue,
+  useOrderForm,
+  useQueueStatus,
+  useLogger,
+  useUpdateOrderFormProfile,
+  useUpdateClientPreferencesData,
+})
+
+export { OrderProfileProvider, useOrderProfile }
 export default { OrderProfileProvider, useOrderProfile }
