@@ -18,6 +18,7 @@ interface ProfileContext {
   setClientPreferencesData: (
     clientPreferences: ClientPreferencesDataInput
   ) => Promise<{ success: boolean }>
+  clientProfileData: CheckoutOrderForm['clientProfileData']
 }
 
 const OrderProfileContext = React.createContext<ProfileContext | undefined>(
@@ -74,7 +75,9 @@ export function createOrderProfileProvider({
   useUpdateOrderFormProfile,
   useOrderForm,
   useQueueStatus,
-}: CreateOrderProfileProvider<CheckoutOrderForm>) {
+}: CreateOrderProfileProvider<CheckoutOrderForm>): {
+  OrderProfileProvider: FC
+} {
   const OrderProfileProvider: FC = ({ children }) => {
     const { enqueue, listen } = useOrderQueue()
     const { setOrderForm, orderForm } = useOrderForm()
@@ -83,17 +86,17 @@ export function createOrderProfileProvider({
     const { log } = useLogger()
 
     const queueStatusRef = useQueueStatus(listen)
-    const { id } = orderForm
+    const { id, clientProfileData } = orderForm
 
     const setOrderProfile = useCallback(
       async (profile: UserProfileInput) => {
-        const task = async () => {
-          const updatedOrderForm = await updateOrderFormProfile(profile, id)
-
-          return updatedOrderForm
-        }
-
         try {
+          const task = async () => {
+            const updatedOrderForm = await updateOrderFormProfile(profile, id)
+
+            return updatedOrderForm
+          }
+
           const newOrderForm = await enqueue(task, SET_PROFILE_TASK)
 
           if (queueStatusRef.current === QueueStatus.FULFILLED) {
@@ -166,8 +169,8 @@ export function createOrderProfileProvider({
     )
 
     const value = useMemo(
-      () => ({ setOrderProfile, setClientPreferencesData }),
-      [setOrderProfile, setClientPreferencesData]
+      () => ({ setOrderProfile, setClientPreferencesData, clientProfileData }),
+      [setOrderProfile, setClientPreferencesData, clientProfileData]
     )
 
     return (
