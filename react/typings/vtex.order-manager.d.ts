@@ -4,10 +4,10 @@ declare module 'vtex.order-manager/OrderQueue' {
   export * from 'vtex.order-manager/react/OrderQueue'
   export { default } from 'vtex.order-manager/react/OrderQueue'
 
-  export enum QueueStatus {
-    PENDING = 'Pending',
-    FULFILLED = 'Fulfilled',
-  }
+  export const QueueStatus = {
+    PENDING: 'Pending',
+    FULFILLED: 'Fulfilled',
+  } as const
 }
 
 declare module 'vtex.order-manager/OrderForm' {
