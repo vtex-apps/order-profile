@@ -122,7 +122,7 @@ export function createOrderProfileProvider({
           return { success: false }
         }
       },
-      [updateOrderFormProfile, id, enqueue, queueStatusRef, setOrderForm, log]
+      [enqueue, queueStatusRef, updateOrderFormProfile, id, setOrderForm, log]
     )
 
     const setClientPreferencesData = useCallback(

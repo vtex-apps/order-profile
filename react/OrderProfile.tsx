@@ -32,8 +32,6 @@ interface UpdateClientPreferencesDataMutationVariables {
   clientPreferences: ClientPreferencesDataInput
 }
 
-// const { useQueueStatus } = OrderQueue
-
 function useUpdateOrderFormProfile() {
   const [updateOrderFormProfile] = useMutation<
     UpdateOrderFormProfileMutation,
