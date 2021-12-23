@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2021-12-23
+
 ### Fixed
 
 - Moved `log` function to out of `useLogger` in order to keep the reference consistent across the app.
